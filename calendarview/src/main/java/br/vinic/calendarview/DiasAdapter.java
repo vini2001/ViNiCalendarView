@@ -42,7 +42,7 @@ public class DiasAdapter extends RecyclerView.Adapter<DiasAdapter.ViewHolder> {
 
         int diaAtual = 0;
         Calendar calendarHj = Calendar.getInstance();
-        if(calendarHj.get(Calendar.YEAR) == ano && calendar.get(Calendar.MONTH) == mes){
+        if(calendarHj.get(Calendar.YEAR) == ano && calendarHj.get(Calendar.MONTH) == mes){
             diaAtual = calendarHj.get(Calendar.DAY_OF_MONTH);
         }
 
@@ -59,6 +59,7 @@ public class DiasAdapter extends RecyclerView.Adapter<DiasAdapter.ViewHolder> {
             data.set(Calendar.MONTH, mes);
             Dia diaa = new Dia(data);
             if(dia == -1) diaa.setSelecao(-1);
+            if(dia == diaAtual) diaa.setSelecao(1);
             mData.add(diaa);
         }
         this.customTextDayColor = customTextDayColor;
