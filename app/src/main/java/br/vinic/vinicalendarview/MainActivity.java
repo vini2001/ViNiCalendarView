@@ -1,12 +1,15 @@
 package br.vinic.vinicalendarview;
 
-import android.graphics.Color;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import java.util.Calendar;
+
+import br.vinic.calendarview.Dia;
+import br.vinic.calendarview.OnDaySelectListener;
+import br.vinic.calendarview.OnMonthChangeListener;
+import br.vinic.calendarview.ViNiCalendarView;
 
 public class MainActivity extends AppCompatActivity {
 

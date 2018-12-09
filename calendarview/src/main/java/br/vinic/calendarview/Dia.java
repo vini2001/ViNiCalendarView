@@ -1,4 +1,4 @@
-package br.vinic.vinicalendarview;
+package br.vinic.calendarview;
 
 import java.util.Calendar;
 

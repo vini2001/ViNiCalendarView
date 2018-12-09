@@ -1,7 +1,6 @@
-package br.vinic.vinicalendarview;
+package br.vinic.calendarview;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
@@ -10,8 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import java.util.Calendar;
 
 class CustomMonthPagerAdapter extends PagerAdapter {
 
@@ -26,7 +23,7 @@ class CustomMonthPagerAdapter extends PagerAdapter {
     public CustomMonthPagerAdapter(Context context, ViNiCalendarView viNiCalendarView) {
         this.context = context;
         this.viNiCalendarView = viNiCalendarView;
-        customBackgroundColor = ContextCompat.getColor(context, R.color.colorPrimary);
+        customBackgroundColor = R.attr.colorPrimary;
     }
 
     @NonNull

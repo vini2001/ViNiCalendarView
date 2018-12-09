@@ -1,4 +1,4 @@
-package br.vinic.vinicalendarview;
+package br.vinic.calendarview;
 
 import android.content.Context;
 import android.graphics.Color;
