@@ -1,14 +1,16 @@
 package br.vinic.vinicalendarview;
 
+import java.util.Calendar;
+
 public class Dia {
-    private int dia;
+    private Calendar dia;
     private int selecao;
 
-    public int getDia() {
+    public Calendar getDia() {
         return dia;
     }
 
-    public void setDia(int dia) {
+    public void setDia(Calendar dia) {
         this.dia = dia;
     }
 
@@ -20,7 +22,7 @@ public class Dia {
         this.selecao = selecao;
     }
 
-    public Dia(int dia) {
+    public Dia(Calendar dia) {
         this.dia = dia;
 
     }
