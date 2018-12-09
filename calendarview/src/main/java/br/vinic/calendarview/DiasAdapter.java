@@ -3,6 +3,7 @@ package br.vinic.calendarview;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,12 +20,11 @@ public class DiasAdapter extends RecyclerView.Adapter<DiasAdapter.ViewHolder> {
     private Context context;
     private ArrayList<Dia> mData = new ArrayList<>();
     private int customSelectedDayTextColor, customTextDayColor;
-    private int customBackgroundColor;
 
     private int diaAtual;
-    private OnDaySelectListener onDaySelectListener;
+    private OnDaySelectListener onDaySelectListener = null;
 
-    public DiasAdapter(Context context, int positionViewPager, int customTextDayColor, int customSelectedDayTextColor, int customBackgroundColor) {
+    DiasAdapter(Context context, int positionViewPager, int customTextDayColor, int customSelectedDayTextColor) {
         this.mInflater = LayoutInflater.from(context);
         this.context = context;
 
@@ -63,20 +63,19 @@ public class DiasAdapter extends RecyclerView.Adapter<DiasAdapter.ViewHolder> {
         }
         this.customTextDayColor = customTextDayColor;
         this.customSelectedDayTextColor = customSelectedDayTextColor;
-        this.customBackgroundColor = customBackgroundColor;
-
         this.diaAtual = diaAtual;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.layout_dia_mes, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
-        Dia dia = mData.get(position);
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+        final Dia dia = mData.get(position);
         holder.txt_dia.setText(dia.getSelecao() != -1 ? String.valueOf(dia.getDia().get(Calendar.DAY_OF_MONTH)) : "");
 
         if(dia.getDia().get(Calendar.DAY_OF_MONTH) == diaAtual){
@@ -91,16 +90,19 @@ public class DiasAdapter extends RecyclerView.Adapter<DiasAdapter.ViewHolder> {
             holder.txt_dia.setTextColor(customTextDayColor);
         }
 
+        final int positionFinal = position;
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for(Dia d : mData){
-                    if(d.getSelecao() == 1) d.setSelecao(0);
-                }
+                if(dia.getSelecao() != -1){
+                    for(Dia d : mData){
+                        if(d.getSelecao() == 1) d.setSelecao(0);
+                    }
 
-                mData.get(position).setSelecao(1);
-                notifyDataSetChanged();
-                onDaySelectListener.onSelectDay(mData.get(position));
+                    mData.get(positionFinal).setSelecao(1);
+                    notifyDataSetChanged();
+                    if(onDaySelectListener != null) onDaySelectListener.onSelectDay(mData.get(positionFinal));
+                }
             }
         });
     }
@@ -110,11 +112,11 @@ public class DiasAdapter extends RecyclerView.Adapter<DiasAdapter.ViewHolder> {
         return mData.size();
     }
 
-    public void setOnDaySelectListener(OnDaySelectListener onDaySelectListener) {
+    void setOnDaySelectListener(OnDaySelectListener onDaySelectListener) {
         this.onDaySelectListener = onDaySelectListener;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         TextView txt_dia;
 
         ViewHolder(View itemView) {

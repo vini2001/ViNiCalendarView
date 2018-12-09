@@ -1,5 +1,5 @@
 package br.vinic.calendarview;
 
 public interface OnDaySelectListener {
-    public void onSelectDay(Dia dia);
+    void onSelectDay(Dia dia);
 }

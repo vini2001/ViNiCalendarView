@@ -1,5 +1,7 @@
 package br.vinic.vinicalendarview;
 
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -13,8 +15,6 @@ import br.vinic.calendarview.ViNiCalendarView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ViNiCalendarView calendar_view;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,14 +22,15 @@ public class MainActivity extends AppCompatActivity {
 
         if(getSupportActionBar() != null) getSupportActionBar().setElevation(0);
 
-        calendar_view = findViewById(R.id.calendar_view);
+        ViNiCalendarView calendar_view = findViewById(R.id.calendar_view);
         calendar_view.setCurrentDate(Calendar.getInstance());
 
-        /*calendar_view.setCustomBackgroundColor(Color.YELLOW);
-        calendar_view.setCustomSelectedDayColor(ContextCompat.getColor(MainActivity.this, R.color.colorAccent));
-        calendar_view.setCustomMonthYearColor(Color.BLUE);
-        calendar_view.setCustomTextDayColor(Color.GRAY);
-        calendar_view.setCustomWeekDayColor(Color.RED);*/
+        calendar_view.setCustomBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.colorPrimary));
+        calendar_view.setCustomSelectedDayColor(Color.WHITE);
+        calendar_view.setCustomMonthYearColor(Color.WHITE);
+        calendar_view.setCustomTextDayColor(Color.WHITE);
+        calendar_view.setCustomWeekDayColor(Color.WHITE);
+        calendar_view.setBackgroundTransicao(ContextCompat.getDrawable(MainActivity.this, R.drawable.background_transicao));
 
         calendar_view.setOnDaySelectListener(new OnDaySelectListener() {
             @Override

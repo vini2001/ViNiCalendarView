@@ -2,7 +2,6 @@ package br.vinic.calendarview;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,17 +12,13 @@ import android.view.ViewGroup;
 class CustomMonthPagerAdapter extends PagerAdapter {
 
     private Context context;
-    private ViNiCalendarView viNiCalendarView;
     private DiasAdapter adapter;
     private int customSelectedDayTextColor = -1;
     private int customTextDayColor = -1;
-    private int customBackgroundColor;
     private OnDaySelectListener onDaySelectListener = null;
 
-    public CustomMonthPagerAdapter(Context context, ViNiCalendarView viNiCalendarView) {
+    CustomMonthPagerAdapter(Context context) {
         this.context = context;
-        this.viNiCalendarView = viNiCalendarView;
-        customBackgroundColor = R.attr.colorPrimary;
     }
 
     @NonNull
@@ -39,7 +34,7 @@ class CustomMonthPagerAdapter extends PagerAdapter {
 
 
 
-        adapter = new DiasAdapter(context, position, customTextDayColor, customSelectedDayTextColor, customBackgroundColor);
+        adapter = new DiasAdapter(context, position, customTextDayColor, customSelectedDayTextColor);
         recyclerView.setAdapter(adapter);
 
         if(onDaySelectListener != null) adapter.setOnDaySelectListener(onDaySelectListener);
@@ -56,7 +51,7 @@ class CustomMonthPagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public boolean isViewFromObject(View view, Object o) {
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object o) {
         return view == o;
     }
 
@@ -65,19 +60,16 @@ class CustomMonthPagerAdapter extends PagerAdapter {
         container.removeView((View) view);
     }
 
-    public void setCustomTextDayColor(int customTextDayColor) {
+    void setCustomTextDayColor(int customTextDayColor) {
         this.customTextDayColor = customTextDayColor;
     }
 
-    public void setCustomSelectedDayTextColor(int customSelectedDayTextColor) {
+    void setCustomSelectedDayTextColor(int customSelectedDayTextColor) {
         this.customSelectedDayTextColor = customSelectedDayTextColor;
     }
 
-    public void setCustomBackgroundColor(int customBackgroundColor){
-        this.customBackgroundColor = customBackgroundColor;
-    }
 
-    public void setOnDaySelectListener(OnDaySelectListener onDaySelectListener) {
+    void setOnDaySelectListener(OnDaySelectListener onDaySelectListener) {
         this.onDaySelectListener = onDaySelectListener;
         if(adapter != null) adapter.setOnDaySelectListener(onDaySelectListener);
     }

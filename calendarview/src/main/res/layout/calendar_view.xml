@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="D"
+            android:text="@string/domingo"
             android:textColor="#FAFAFA" />
 
         <TextView
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="S"
+            android:text="@string/segunda"
             android:textColor="#FAFAFA" />
 
         <TextView
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="T"
+            android:text="@string/terca"
             android:textColor="#FAFAFA" />
 
         <TextView
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="Q"
+            android:text="@string/quarta"
             android:textColor="#FAFAFA" />
 
         <TextView
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="Q"
+            android:text="@string/quinta"
             android:textColor="#FAFAFA" />
 
         <TextView
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="S"
+            android:text="@string/sexta"
             android:textColor="#FAFAFA" />
 
         <TextView
@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="S"
+            android:text="@string/sabado"
             android:textColor="#FAFAFA" />
     </LinearLayout>
 
@@ -94,4 +94,12 @@
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:background="?attr/colorPrimary" />
+
+    <LinearLayout
+        android:id="@+id/lnl_transicao"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@drawable/background_transicao"
+        android:orientation="horizontal" />
+
 </LinearLayout>

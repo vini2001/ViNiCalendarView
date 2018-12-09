@@ -1,7 +1,7 @@
 package br.vinic.calendarview;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
@@ -16,40 +16,36 @@ public class ViNiCalendarView extends FrameLayout {
     private CustomMonthPagerAdapter pagerAdapter;
     private Calendar dataAtual;
     private TextView txt_mes;
-    private LinearLayout lnl_dias_semana;
-    private int customBackgroundColor = Color.parseColor("#008577");
-    private int customSelectedDayTextColor = Color.parseColor("#00baa7");
-    private int customTextDayColor = Color.WHITE;
-    private int customWeekDayColor = Color.WHITE;
-    private int customMonthYearColor = Color.WHITE;
+    private LinearLayout lnl_dias_semana, lnl_transicao;
 
     private TextView[] txtsDiasSemana;
-    private OnMonthChangeListener onMonthChangeListener;
+    private OnMonthChangeListener onMonthChangeListener = null;
 
 
     public ViNiCalendarView(Context context) {
         super(context);
-        init(null, 0);
+        init();
     }
 
     public ViNiCalendarView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(attrs, 0);
+        init();
     }
 
     public ViNiCalendarView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(attrs, defStyleAttr);
+        init();
     }
 
-    private void init(AttributeSet attrs, int defStyleAttr) {
+    private void init() {
         View view = inflate(getContext(), R.layout.calendar_view, null);
         addView(view);
 
+        lnl_transicao = view.findViewById(R.id.lnl_transicao);
         lnl_dias_semana = view.findViewById(R.id.lnl_dias_semana);
         txt_mes = view.findViewById(R.id.txt_mes);
         viewPager = view.findViewById(R.id.viewPager);
-        pagerAdapter = new CustomMonthPagerAdapter(getContext(), ViNiCalendarView.this);
+        pagerAdapter = new CustomMonthPagerAdapter(getContext());
         viewPager.setAdapter(pagerAdapter);
         txtsDiasSemana = new TextView[]{findViewById(R.id.txt_domingo), findViewById(R.id.txt_segunda), findViewById(R.id.txt_terca), findViewById(R.id.txt_quarta), findViewById(R.id.txt_quinta), findViewById(R.id.txt_sexta), findViewById(R.id.txt_sabado)};
 
@@ -72,7 +68,7 @@ public class ViNiCalendarView extends FrameLayout {
                 txt_mes.setText(getStringMes(i));
                 int ano = i/12;
                 int mes = i%12;
-                onMonthChangeListener.onMonthChanged(ano, mes);
+                if(onMonthChangeListener != null) onMonthChangeListener.onMonthChanged(ano, mes);
             }
 
             @Override
@@ -94,32 +90,26 @@ public class ViNiCalendarView extends FrameLayout {
     }
 
     public void setCustomBackgroundColor(int color) {
-        customBackgroundColor = color;
         txt_mes.setBackgroundColor(color);
         lnl_dias_semana.setBackgroundColor(color);
         viewPager.setBackgroundColor(color);
-        pagerAdapter.setCustomBackgroundColor(color);
     }
 
     public void setCustomSelectedDayColor(int customSelectedDayTextColor) {
-        this.customSelectedDayTextColor = customSelectedDayTextColor;
         pagerAdapter.setCustomSelectedDayTextColor(customSelectedDayTextColor);
     }
 
     public void setCustomTextDayColor(int customTextDayColor) {
-        this.customTextDayColor = customTextDayColor;
         pagerAdapter.setCustomTextDayColor(customTextDayColor);
     }
 
     public void setCustomWeekDayColor(int customWeekDayColor) {
-        this.customWeekDayColor = customWeekDayColor;
         for(TextView txt : txtsDiasSemana){
             txt.setTextColor(customWeekDayColor);
         }
     }
 
     public void setCustomMonthYearColor(int customMonthYearColor) {
-        this.customMonthYearColor = customMonthYearColor;
         txt_mes.setTextColor(customMonthYearColor);
     }
 
@@ -129,6 +119,10 @@ public class ViNiCalendarView extends FrameLayout {
 
     public void setOnMonthChangeListener(OnMonthChangeListener onMonthChangeListener){
         this.onMonthChangeListener = onMonthChangeListener;
+    }
+
+    public void setBackgroundTransicao(Drawable drawable){
+        lnl_transicao.setBackground(drawable);
     }
 
 }

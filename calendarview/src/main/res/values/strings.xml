@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">CalendarView</string>
+    <string name="domingo">D</string>
+    <string name="segunda">S</string>
+    <string name="terca">T</string>
+    <string name="quarta">Q</string>
+    <string name="quinta">Q</string>
+    <string name="sexta">S</string>
+    <string name="sabado">S</string>
 </resources>
