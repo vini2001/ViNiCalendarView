@@ -19,7 +19,7 @@ Versão atual __(1.1.0)__ - Possui todas as funcionalidades básicas e a marcaç
 ##### build.gradle(app)
 
 	dependencies{  
-		implementation 'com.github.vini2001:ViNiCalendarView:1.0.1'  
+		implementation 'com.github.vini2001:vinicalendarview:1.1'
 	}  
 
 
@@ -29,7 +29,6 @@ Versão atual __(1.1.0)__ - Possui todas as funcionalidades básicas e a marcaç
         android:id="@+id/calendar_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
         app:busyDayLevel3color="#ffa8a8"
         app:busyDayLevel2color="#ff6363"
         app:busyDayLevel1color="#ff0000" />
