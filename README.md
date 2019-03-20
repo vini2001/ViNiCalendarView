@@ -29,7 +29,12 @@ Versão atual __(1.0.1)__ - Possui todas as funcionalidades básicas, já está 
        	android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
+	app:busyDayLevel1color="#ffa8a8"
+        app:busyDayLevel2color="#ff6363"
+        app:busyDayLevel3color="#ff0000"
 	/>
+	
+	Personalize busyDayLevel1color, busyDayLevel2color e busyDayLevel3color como quiser. Estas são as cores das marcações no calendário de acordo com sua importância.
 	
 	
 ##### Métodos:
