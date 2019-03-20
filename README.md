@@ -4,7 +4,7 @@
 
 
 ### Calendário em desenvolvimento para facilitar a marcação de eventos.
-Versão atual __(1.0.1)__ - Possui todas as funcionalidades básicas, já está pronta para uso.
+Versão atual __(1.1.0)__ - Possui todas as funcionalidades básicas e a marcação de eventos. Pronto para uso!
 
 #### Instruções de implementação:</h4>
 
@@ -26,16 +26,15 @@ Versão atual __(1.0.1)__ - Possui todas as funcionalidades básicas, já está 
 ##### Código xml:
 
 	<br.vinic.calendarview.ViNiCalendarView
-       	android:id="@+id/calendarView"
+        android:id="@+id/calendar_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-	app:busyDayLevel1color="#ffa8a8"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:busyDayLevel3color="#ffa8a8"
         app:busyDayLevel2color="#ff6363"
-        app:busyDayLevel3color="#ff0000"
-	/>
-	
-	Personalize busyDayLevel1color, busyDayLevel2color e busyDayLevel3color como quiser. Estas são as cores das marcações no calendário de acordo com sua importância.
-	
+        app:busyDayLevel1color="#ff0000" />
+
+Personalize busyDayLevel1color, busyDayLevel2color e busyDayLevel3color como quiser. Estas são as cores das marcações no calendário de acordo com sua importância.
 	
 ##### Métodos:
 
@@ -64,10 +63,19 @@ Versão atual __(1.0.1)__ - Possui todas as funcionalidades básicas, já está 
 	void setOnDaySelectListener(OnDayChangeListener onDayChangeListener); //Seta o listener para quando o usuário selecionar um dia no calendário
 
 	void setOnMonthChangeListener(OnMonthChangeListener onMonthChangeListener) //Seta o listener para quando o usuário rolar para o mês do lado
+	
+##### Marcações no Calendário
+	EventDay eventDay1 = new EventDay(Calendar calendar, int importance);
+	/*importance pode ser EventDay.LITTLE_IMPORTANT, EventDay.IMPORTANT ou EventDay.VERY_IMPORTANT*/
+	
+	void addEventDays(List<EventDay> eventDayList); //Adiciona uma lista de marcações de eventos
+	void addEventDay(EventDay eventDay); //Adiciona uma marcação de evento	
+	
+	
+	
 
 <div>
 <img width="270px" height="480" src="https://raw.githubusercontent.com/vini2001/ViNiCalendarView/master/Screenshot_20181209-181920.png"/>
 <img width="270px" height="480" src="https://raw.githubusercontent.com/vini2001/ViNiCalendarView/master/Screenshot_20181209-181915.png"/>
 </div>
-
 
