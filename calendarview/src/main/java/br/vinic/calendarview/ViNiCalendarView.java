@@ -64,6 +64,14 @@ public class ViNiCalendarView extends FrameLayout {
         pagerAdapter.addEventDays(eventDayList);
     }
 
+    public void setEventDays(List<EventDay> eventDayList){
+        pagerAdapter.setEventDays(eventDayList);
+    }
+
+    public void clearEventDays(){
+        pagerAdapter.clearEventDays();
+    }
+
     public void addEventDay(EventDay eventDay){
         pagerAdapter.addEventDay(eventDay);
     }

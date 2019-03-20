@@ -110,4 +110,32 @@ class CustomMonthPagerAdapter extends PagerAdapter {
             adapter3.setEventDays(eventDays);
         }
     }
+
+    public void setEventDays(List<EventDay> eventDayList) {
+        eventDays.clear();
+        eventDays.addAll(eventDayList);
+        if(adapter1 != null){
+            adapter1.setEventDays(eventDays);
+        }
+        if(adapter2 != null){
+            adapter2.setEventDays(eventDays);
+        }
+        if(adapter3 != null){
+            adapter3.setEventDays(eventDays);
+        }
+    }
+
+
+    public void clearEventDays() {
+        eventDays.clear();
+        if(adapter1 != null){
+            adapter1.setEventDays(eventDays);
+        }
+        if(adapter2 != null){
+            adapter2.setEventDays(eventDays);
+        }
+        if(adapter3 != null){
+            adapter3.setEventDays(eventDays);
+        }
+    }
 }
