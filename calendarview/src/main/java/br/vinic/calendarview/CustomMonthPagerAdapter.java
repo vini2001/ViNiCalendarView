@@ -15,19 +15,18 @@ class CustomMonthPagerAdapter extends PagerAdapter {
 
     private List<EventDay> eventDays;
     private Context context;
-    private DiasAdapter adapter;
     private int customSelectedDayTextColor = -1;
     private int customTextDayColor = -1;
     private OnDaySelectListener onDaySelectListener = null;
+
+    private DiasAdapter adapter;
+    private DiasAdapter adapter1, adapter2, adapter3;
 
     CustomMonthPagerAdapter(Context context, List<EventDay> eventDays) {
         this.context = context;
         this.eventDays = eventDays;
     }
 
-    CustomMonthPagerAdapter(Context context) {
-        this.context = context;
-    }
 
     @NonNull
     @Override
@@ -42,6 +41,11 @@ class CustomMonthPagerAdapter extends PagerAdapter {
 
         adapter = new DiasAdapter(context, position, customTextDayColor, customSelectedDayTextColor, eventDays);
         recyclerView.setAdapter(adapter);
+
+        adapter3 = adapter2;
+        adapter2 = adapter1;
+        adapter1 = adapter;
+
 
         if(onDaySelectListener != null) adapter.setOnDaySelectListener(onDaySelectListener);
 
@@ -76,21 +80,34 @@ class CustomMonthPagerAdapter extends PagerAdapter {
 
 
     void setOnDaySelectListener(OnDaySelectListener onDaySelectListener) {
+
         this.onDaySelectListener = onDaySelectListener;
         if(adapter != null) adapter.setOnDaySelectListener(onDaySelectListener);
     }
 
     public void addEventDays(List<EventDay> eventDayList) {
         eventDays.addAll(eventDayList);
-        if(adapter != null){
-            adapter.notifyDataSetChanged();
+        if(adapter1 != null){
+            adapter1.setEventDays(eventDays);
+        }
+        if(adapter2 != null){
+            adapter2.setEventDays(eventDays);
+        }
+        if(adapter3 != null){
+            adapter3.setEventDays(eventDays);
         }
     }
 
     public void addEventDay(EventDay eventDay) {
         eventDays.add(eventDay);
-        if(adapter != null){
-            adapter.notifyDataSetChanged();
+        if(adapter1 != null){
+            adapter1.setEventDays(eventDays);
+        }
+        if(adapter2 != null){
+            adapter2.setEventDays(eventDays);
+        }
+        if(adapter3 != null){
+            adapter3.setEventDays(eventDays);
         }
     }
 }

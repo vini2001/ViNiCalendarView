@@ -1,6 +1,7 @@
 package br.vinic.vinicalendarview;
 
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 calendar_view.addEventDays(eventDayList);
             }
         });
+
 
         calendar_view.setOnMonthChangeListener(new OnMonthChangeListener() {
             @Override

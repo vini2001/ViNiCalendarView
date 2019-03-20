@@ -19,7 +19,7 @@ import java.util.List;
 
 public class DiasAdapter extends RecyclerView.Adapter<DiasAdapter.ViewHolder> {
 
-    private final List<EventDay> eventDays;
+    private List<EventDay> eventDays;
     private LayoutInflater mInflater;
     private Context context;
     private ArrayList<Dia> mData = new ArrayList<>();
@@ -140,6 +140,11 @@ public class DiasAdapter extends RecyclerView.Adapter<DiasAdapter.ViewHolder> {
 
     void setOnDaySelectListener(OnDaySelectListener onDaySelectListener) {
         this.onDaySelectListener = onDaySelectListener;
+    }
+
+    public void setEventDays(List<EventDay> eventDays) {
+        this.eventDays = eventDays;
+        notifyDataSetChanged();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
