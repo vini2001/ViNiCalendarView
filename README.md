@@ -4,7 +4,7 @@
 
 
 ### Calendário em desenvolvimento para facilitar a marcação de eventos.
-Versão atual __(1.1.0)__ - Possui todas as funcionalidades básicas e a marcação de eventos. Pronto para uso!
+Versão atual __(1.2.0)__ - Possui todas as funcionalidades básicas e a marcação de eventos. Pronto para uso!
 
 #### Instruções de implementação:</h4>
 
@@ -69,6 +69,8 @@ Personalize busyDayLevel1color, busyDayLevel2color e busyDayLevel3color como qui
 	
 	void addEventDays(List<EventDay> eventDayList); //Adiciona uma lista de marcações de eventos
 	void addEventDay(EventDay eventDay); //Adiciona uma marcação de evento	
+	void setEventDays(List<EventDay> eventDayList); //Limpa a lista de EventDays e adiciona uma nova lista e atualiza a interface com a nova informação
+	void clearEventDays(); //Limpa a lista de EventDays e atualiza a interface com a nova informação
 	
 	
 	
