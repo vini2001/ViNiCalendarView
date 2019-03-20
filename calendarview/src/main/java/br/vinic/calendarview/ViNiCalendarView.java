@@ -1,6 +1,8 @@
 package br.vinic.calendarview;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -9,7 +11,9 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class ViNiCalendarView extends FrameLayout {
     private ViewPager viewPager;
@@ -18,8 +22,13 @@ public class ViNiCalendarView extends FrameLayout {
     private TextView txt_mes;
     private LinearLayout lnl_dias_semana, lnl_transicao;
 
+    public static int CIRCLE1_COLOR;
+    public static int CIRCLE2_COLOR;
+    public static int CIRCLE3_COLOR;
+
     private TextView[] txtsDiasSemana;
     private OnMonthChangeListener onMonthChangeListener = null;
+    private ArrayList<EventDay> diasEventos = new ArrayList<>();
 
 
     public ViNiCalendarView(Context context) {
@@ -29,23 +38,47 @@ public class ViNiCalendarView extends FrameLayout {
 
     public ViNiCalendarView(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ViNiCalendarView, 0, 0);
+        CIRCLE1_COLOR = a.getColor(R.styleable.ViNiCalendarView_busyDayLevel1color, Color.parseColor("#00FF00"));
+        CIRCLE2_COLOR = a.getColor(R.styleable.ViNiCalendarView_busyDayLevel2color, Color.parseColor("#00FF00"));
+        CIRCLE3_COLOR = a.getColor(R.styleable.ViNiCalendarView_busyDayLevel3color, Color.parseColor("#00FF00"));
+        a.recycle();
+
         init();
     }
 
     public ViNiCalendarView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ViNiCalendarView, 0, 0);
+        CIRCLE1_COLOR = a.getColor(R.styleable.ViNiCalendarView_busyDayLevel1color, Color.parseColor("#00FF00"));
+        CIRCLE2_COLOR = a.getColor(R.styleable.ViNiCalendarView_busyDayLevel2color, Color.parseColor("#00FF00"));
+        CIRCLE3_COLOR = a.getColor(R.styleable.ViNiCalendarView_busyDayLevel3color, Color.parseColor("#00FF00"));
+        a.recycle();
+
         init();
+    }
+
+    public void addEventDays(List<EventDay> eventDayList){
+        pagerAdapter.addEventDays(eventDayList);
+    }
+
+    public void addEventDay(EventDay eventDay){
+        pagerAdapter.addEventDay(eventDay);
     }
 
     private void init() {
         View view = inflate(getContext(), R.layout.calendar_view, null);
         addView(view);
 
+
         lnl_transicao = view.findViewById(R.id.lnl_transicao);
         lnl_dias_semana = view.findViewById(R.id.lnl_dias_semana);
         txt_mes = view.findViewById(R.id.txt_mes);
         viewPager = view.findViewById(R.id.viewPager);
-        pagerAdapter = new CustomMonthPagerAdapter(getContext());
+
+        pagerAdapter = new CustomMonthPagerAdapter(getContext(), diasEventos);
         viewPager.setAdapter(pagerAdapter);
         txtsDiasSemana = new TextView[]{findViewById(R.id.txt_domingo), findViewById(R.id.txt_segunda), findViewById(R.id.txt_terca), findViewById(R.id.txt_quarta), findViewById(R.id.txt_quinta), findViewById(R.id.txt_sexta), findViewById(R.id.txt_sabado)};
 

@@ -11,5 +11,8 @@
         android:id="@+id/calendar_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:busyDayLevel3color="#000000"
+        app:busyDayLevel2color="#333333"
+        app:busyDayLevel1color="#777777" />
 </android.support.constraint.ConstraintLayout>

@@ -22,8 +22,7 @@ public class Dia {
         this.selecao = selecao;
     }
 
-    public Dia(Calendar dia) {
-        this.dia = dia;
-
+    public Dia(Calendar day) {
+        this.dia = day;
     }
 }

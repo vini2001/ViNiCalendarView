@@ -9,13 +9,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 class CustomMonthPagerAdapter extends PagerAdapter {
 
+    private List<EventDay> eventDays;
     private Context context;
     private DiasAdapter adapter;
     private int customSelectedDayTextColor = -1;
     private int customTextDayColor = -1;
     private OnDaySelectListener onDaySelectListener = null;
+
+    CustomMonthPagerAdapter(Context context, List<EventDay> eventDays) {
+        this.context = context;
+        this.eventDays = eventDays;
+    }
 
     CustomMonthPagerAdapter(Context context) {
         this.context = context;
@@ -32,9 +40,7 @@ class CustomMonthPagerAdapter extends PagerAdapter {
         int numberOfColumns = 7;
         recyclerView.setLayoutManager(new GridLayoutManager(context, numberOfColumns));
 
-
-
-        adapter = new DiasAdapter(context, position, customTextDayColor, customSelectedDayTextColor);
+        adapter = new DiasAdapter(context, position, customTextDayColor, customSelectedDayTextColor, eventDays);
         recyclerView.setAdapter(adapter);
 
         if(onDaySelectListener != null) adapter.setOnDaySelectListener(onDaySelectListener);
@@ -72,5 +78,19 @@ class CustomMonthPagerAdapter extends PagerAdapter {
     void setOnDaySelectListener(OnDaySelectListener onDaySelectListener) {
         this.onDaySelectListener = onDaySelectListener;
         if(adapter != null) adapter.setOnDaySelectListener(onDaySelectListener);
+    }
+
+    public void addEventDays(List<EventDay> eventDayList) {
+        eventDays.addAll(eventDayList);
+        if(adapter != null){
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    public void addEventDay(EventDay eventDay) {
+        eventDays.add(eventDay);
+        if(adapter != null){
+            adapter.notifyDataSetChanged();
+        }
     }
 }

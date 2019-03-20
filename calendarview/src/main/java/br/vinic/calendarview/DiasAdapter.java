@@ -2,6 +2,7 @@ package br.vinic.calendarview;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -9,13 +10,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class DiasAdapter extends RecyclerView.Adapter<DiasAdapter.ViewHolder> {
 
+    private final List<EventDay> eventDays;
     private LayoutInflater mInflater;
     private Context context;
     private ArrayList<Dia> mData = new ArrayList<>();
@@ -24,11 +28,10 @@ public class DiasAdapter extends RecyclerView.Adapter<DiasAdapter.ViewHolder> {
     private int diaAtual;
     private OnDaySelectListener onDaySelectListener = null;
 
-    DiasAdapter(Context context, int positionViewPager, int customTextDayColor, int customSelectedDayTextColor) {
+    DiasAdapter(Context context, int positionViewPager, int customTextDayColor, int customSelectedDayTextColor, List<EventDay> eventDays) {
         this.mInflater = LayoutInflater.from(context);
         this.context = context;
-
-
+        this.eventDays = eventDays;
 
         int ano = positionViewPager/12;
         int mes = positionViewPager%12;
@@ -106,6 +109,28 @@ public class DiasAdapter extends RecyclerView.Adapter<DiasAdapter.ViewHolder> {
                 }
             }
         });
+
+        if(holder.lnl_drawable.getBackground() != null){
+            holder.lnl_drawable.setBackground(null);
+        }
+
+        if(dia.getSelecao() != -1){
+            for(int i = 0; i < eventDays.size(); i++){
+                Calendar cEv = eventDays.get(i).getDia();
+                Calendar cThis = dia.getDia();
+
+                if(cEv.get(Calendar.DAY_OF_MONTH) == cThis.get(Calendar.DAY_OF_MONTH) && cEv.get(Calendar.MONTH) == cThis.get(Calendar.MONTH) && cEv.get(Calendar.YEAR) == cThis.get(Calendar.YEAR)){
+                    holder.lnl_drawable.setBackground(ContextCompat.getDrawable(context, R.drawable.circle));
+                    switch (eventDays.get(i).getImportance()){
+                        case 1:  holder.lnl_drawable.getBackground().setColorFilter(ViNiCalendarView.CIRCLE1_COLOR, PorterDuff.Mode.SRC_IN); break;
+                        case 2:  holder.lnl_drawable.getBackground().setColorFilter(ViNiCalendarView.CIRCLE2_COLOR, PorterDuff.Mode.SRC_IN); break;
+                        case 3:  holder.lnl_drawable.getBackground().setColorFilter(ViNiCalendarView.CIRCLE3_COLOR, PorterDuff.Mode.SRC_IN); break;
+                    }
+                    break;
+                }
+            }
+        }
+
     }
 
     @Override
@@ -119,10 +144,12 @@ public class DiasAdapter extends RecyclerView.Adapter<DiasAdapter.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView txt_dia;
+        LinearLayout lnl_drawable;
 
         ViewHolder(View itemView) {
             super(itemView);
             txt_dia = itemView.findViewById(R.id.txt_dia);
+            lnl_drawable = itemView.findViewById(R.id.lnl_drawable);
         }
     }
 

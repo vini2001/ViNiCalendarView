@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <declare-styleable name="ViNiCalendarView">
+        <attr name="busyDayLevel1color" format="color"/>
+        <attr name="busyDayLevel2color" format="color"/>
+        <attr name="busyDayLevel3color" format="color"/>
+    </declare-styleable>
+</resources>
